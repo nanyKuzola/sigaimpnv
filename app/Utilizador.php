@@ -30,9 +30,7 @@ class Utilizador extends Authenticatable
     {
         return $this->belongsToMany('App\Perfil','perfil_utilizadors','utilizador_id','perfil_id');
     }
-
     // retorna os cursos associado ao utilizador
-
     public function cursos()
     {
         return $this->belongsToMany('App\Curso','curso_utilizadors','utilizador_id','curso_id');

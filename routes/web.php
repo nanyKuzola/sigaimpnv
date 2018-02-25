@@ -11,7 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('begin');
+Route::get('/paginalogin','UtilizadorController@logins')->name('logins');
+Route::post('/paginalogin','UtilizadorController@entrar')->name('logins');
+
+Route::prefix('utilizador')->group (function ()
+{
+   Route::get('','UtilizadorController@inicio')->name('inicio');
+   Route::get('/sair','UtilizadorController@sair')->name('sair');
+
 });
-Route::get('/entrar','UtilizadorController@entrar');

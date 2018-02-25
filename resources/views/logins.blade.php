@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>Pagina de Login</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -38,30 +38,30 @@
 
     <div class="row">
 
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-6 col-md-offset-3">
 
             <div class="login-panel panel panel-default">
 
                 <div class="panel-heading">
-                    <h3 class="panel-title">SIGA - Sistema Integrado de Gestão Academica</h3>
+                    <h3 class="panel-title text-center">SIGA</h3>
                 </div>
 
                 <div class="panel-body">
 
-                    <form method="POST">
+                    <form method="POST" action="{{route('logins')}}">
                         {{csrf_field()}}
 
                         <div class="form-group">
-                            <input class="form-control" placeholder="E-mail" name="email" type="email" name="email" autofocus>
+                            <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus required>
                         </div>
 
                         <div class="form-group">
-                            <input class="form-control" placeholder="Password" name="password" type="password">
+                            <input class="form-control" placeholder="Password" name="password" type="password" required>
                         </div>
 
                         <!-- Change this to a button or input when using this as a form -->
-                        <button type="submit" class="btn btn-lg btn-success btn-block">
-                            Login
+                        <button type="submit" class="btn btn col-md-4 col-md-offset-4">
+                            Entrar
                         </button>
                         <!--  <a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
                         -->

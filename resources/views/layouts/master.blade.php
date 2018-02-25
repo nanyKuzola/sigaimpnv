@@ -22,7 +22,7 @@
 
                 <!-- Page Content -->
                 <div id="page-wrapper">
-                   @yield('conteuto')
+                   @yield('conteudo')
                     <!-- /.container-fluid -->
                 </div>
                 <!-- /#page-wrapper -->
