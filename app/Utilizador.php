@@ -13,6 +13,12 @@ class Utilizador extends Authenticatable
     /**
 
      */
+
+
+    public static function getClassNome()
+    {
+        return "Utilizador";
+    }
     protected $fillable = [
         'primeiro_nome','sobre_nome','email', 'password',
     ];

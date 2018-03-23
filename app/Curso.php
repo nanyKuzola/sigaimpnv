@@ -35,4 +35,13 @@ class Curso extends Model
     {
         return $this->belongsTo('App\PerfilUtilizador');
     }
+    // retorna nos anos associado a este curso
+    public function classes()
+    {
+        return $this->hasMany('App\Classe','curso_id');
+    }
+    public static function getClassNome()
+    {
+        return "Curso";
+    }
 }

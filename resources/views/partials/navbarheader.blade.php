@@ -1,7 +1,8 @@
 <ul class="nav navbar-top-links navbar-right">
 
 
-    olá  {{strtoupper(auth()->user()->perfils()->where('utilizador_id',auth()->user()->id)->first()->nome)}} {{strtoupper(auth()->user()->primeiro_nome)}}
+    olá {{strtoupper(auth()->user()->perfils()->where('utilizador_id',auth()->user()->id)->first()->nome)}} {{strtoupper(auth()->user()->primeiro_nome)}}
+
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>

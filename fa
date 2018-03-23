@@ -1,0 +1,11 @@
+[33mcommit c750259a62e74dc9df41dc21cb30ee8899f1757f[m[33m ([m[1;36mHEAD -> [m[1;32mfeature/superadministrador[m[33m, [m[1;32mmaster[m[33m, [m[1;32mfeature/func_login[m[33m)[m
+Author: Kuzola <vui.vui@hotmail.com>
+Date:   Sun Feb 25 19:54:14 2018 +0100
+
+    login e logout feito
+
+[33mcommit ad150721f8e48c53557e056c186973999da093c9[m
+Author: Kuzola <vui.vui@hotmail.com>
+Date:   Fri Feb 23 23:51:22 2018 +0100
+
+    master+base de dados+login

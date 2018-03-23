@@ -12,11 +12,12 @@
 
         <!-- Styles -->
         <style>
-            html, body {
-                background:url("IMPV.PNG") no-repeat center center fixed;
+            html,body{
+
                 color: #636b6f;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
+                height: 100vh;
                 margin: 0;
             }
             .full-height {
@@ -37,23 +38,21 @@
                 top: 18px;
             }
             .content {
-
-                margin-top: 70px;
+                text-align: center;
+                margin-top: 500px;
                 margin-left: 300px;
-
             }
             .title {
                 font-size: 84px;
-                margin-left: 150px;
             }
             .siga {
                 font-size: 20px;
                 margin-top: -40px;
-                margin-left: -35px;
             }
             .plusins{
                 margin-left: 10px;
             }
+
             a{
                 text-decoration: none;
                 color: gray;
@@ -61,6 +60,7 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
             .esquerda{
                 float: left;
             }
@@ -69,59 +69,20 @@
             }
             .inscricao
             {
-
                 margin-left: 200px;
                 margin-top: 400px;
             }
             .entrar
             {
-                margin-right: 300px;
-                margin-top: -15px;
-
+               margin-right: 200px;
+                margin-top: 400px;
             }
         </style>
     </head>
     <body>
-
-        <div class="#">
-            <div class="inscricao">
-
-                    <strong class="plusins">
-
-                        <a href="{{route('formInscricao')}}">
-                            INSCRIÇÃO
-                        </a>
-
-                    </strong>
-                <strong>|</strong>
-                    <strong>
-                        <a href="{{route('InscResultados')}}">
-                            RESULTADOS
-                        </a>
-                    </strong>
-            </div>
-        </div>
-
-       <div class="flexb-center position-ref">
-              <div class="content">
-                <div class="title m-b-md">
-                    SIGAIMPNV
-                </div>
-                  <p class="siga">
-                      <strong>
-                          Sistema Integrado de Gestão Académica do Instituto Médio Politécnico Nova Vida Nº 2037
-                      </strong>
-                  </p>
-            </div>
-        </div>
-        <div class="direita">
-            <div class="entrar">
-                <strong>
-                    <a href="{{route('logins')}}">
-                        ENTRAR
-                    </a>
-                </strong>
-            </div>
-        </div>
+ 
+       <div>
+           <p>RESULTADOS</p>
+       </div>
     </body>
 </html>

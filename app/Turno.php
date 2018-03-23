@@ -13,6 +13,11 @@ class Turno extends Model
 
     // devolve os cursos associados ao turno
 
+    public static function getClassNome()
+    {
+        return "Turno";
+    }
+
     public function cursos()
     {
         return $this->belongsToMany('App\Curso','curso_turnos','turno_id','curso_id');

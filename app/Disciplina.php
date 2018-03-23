@@ -21,5 +21,9 @@ class Disciplina extends Model
         return $this->belongsToMany('App\Curso','curso_disciplinas','disciplina_id','curso_id');
 
     }
+    public static function getClassNome()
+    {
+        return "Disciplina";
+    }
 
 }

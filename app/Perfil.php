@@ -10,6 +10,12 @@ class Perfil extends Model
     protected $id;
     protected $nome;
 
+
+    public static function getClassNome()
+    {
+        return "Perfil";
+    }
+
     // devolve o utilizador associado a este perfil
     public function utilizadors()
     {

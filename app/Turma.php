@@ -14,6 +14,10 @@ class Turma extends Model
     protected $perfilutilizador_id;// recebeu o chave primaria da tabela perfilutilizador 1:1
 
 
+    public static function getClassNome()
+    {
+        return "Turma";
+    }
     // devolve o curso e turno da corrente turma
     public function cursoturno()
     {
