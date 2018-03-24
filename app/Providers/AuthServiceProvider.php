@@ -32,5 +32,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('Super-Administrador',function($user){
             return (strtolower($user->perfils()->first()->nome) == 'super-administrador');
         });
+        Gate::define('FSP',function($user){
+            return (strtolower($user->perfils()->first()->nome) == 'FSP');
+        });
+
+
     }
 }

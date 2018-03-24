@@ -5,61 +5,38 @@
                 <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
             </li>
 
-                    <li>
-                        <a href="#">Adicionar<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{route('CUtilizador')}}"><i class="fa fa-user"></i> Utilizador</a>
-                            </li>
-                            <li>
-                                <a href="{{route('CPerfil')}}">Perfil</a>
-                            </li>
-                            <li>
-                                <a href="#">Curso</a>
-                            </li>
-                            <li>
-                                <a href="#">Disciplina</a>
-                            </li>
-                            <li>
-                                <a href="#">classe</a>
-                            </li>
-                            <li>
-                                <a href="#">Turno</a>
-                            </li>
-                            <li>
-                                <a href="#">Turma</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li>
-                        <a href="#">  Listar<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#"><i class="fa fa-user"></i> Utilizador</a>
-                            </li>
-                            <li>
-                                <a href="#">Perfil</a>
-                            </li>
-                            <li>
-                                <a href="#">Curso</a>
-                            </li>
-                            <li>
-                                <a href="#">Disciplina</a>
-                            </li>
-                            <li>
-                                <a href="#">classe</a>
-                            </li>
-                            <li>
-                                <a href="#">Turno</a>
-                            </li>
-                            <li>
-                                <a href="#">Turma</a>
-                            </li>
-                        </ul>
-                    </li>
+              <!--
+                 AQUI VAI O MENNU QUE TIREI
+              -->
 
-            
+
+                <li>
+                    <a href="#">Candidatura<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{route('ver_candidatura')}}"><i class="fa fa-user"></i>Ver</a>
+                        </li>
+                        <li>
+                            <a href="#">Coordenador de Area de Formação</a>
+                        </li>
+                        <li>
+                            <a href="#">Coordenador de Curso</a>
+                        </li>
+                        <li>
+                            <a href="#">Coordenador de turno</a>
+                        </li>
+                        <li>
+                            <a href="#">classe</a>
+                        </li>
+                        <li>
+                            <a href="#">Turno</a>
+                        </li>
+                        <li>
+                            <a href="#">Turma</a>
+                        </li>
+                    </ul>
+
+                </li>
            @can('Director Geral', auth()->user())
                     <li>
                         <a href="#"> Nomear<span class="fa arrow"></span></a>

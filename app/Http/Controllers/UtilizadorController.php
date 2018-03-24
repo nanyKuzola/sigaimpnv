@@ -107,6 +107,7 @@ class UtilizadorController extends Controller
 
         $utilizador->save();
 
+        /*
 
         $_utilizador = Utilizador::find($utilizador->id);
 
@@ -120,14 +121,28 @@ class UtilizadorController extends Controller
         // ASSOCIAÇÃO COM CADA CURSO QUE O UTILIZADOR ESCOLHEU
         $_utilizador->cursos()->attach(Curso::where('nome','=',$utilizador->opcao_curso_1)->first()->id);
         $_utilizador->cursos()->attach(Curso::where('nome','=',$utilizador->opcao_curso_2)->first()->id);
-        $_utilizador->cursos()->attach(Curso::where('nome','=',$utilizador->opcao_curso_3)->first()->id);
+        $_utilizador->cursos()->attach(Curso::where('nome','=',$utilizador->opcao_curso_3)->first()->id);*/
 
 
-        return true;
+        return redirect()->route('paginainicial');
 
     }
     public function resultados()
     {
         return view('resultados');
+    }
+
+    // Funções do funcionário da secretaria pedagógica
+
+    public function vercandidaturas() // exibe todas as candidaturas feitas pelo candidado a discente
+    {
+        $u = Utilizador::all();// recebece todos estudantes
+
+
+        //  $utilizadores = $utilizadors->perfils()->get();
+        //  $courses = Course::with('profiles')->get();
+
+        dd(true);
+        return view('pages.utilizador.fsp.candidaturas');
     }
 }

@@ -32,6 +32,11 @@ Route::prefix('utilizador')->group (function ()
    Route::put('/perfis','UtilizadorController@perfilActual')->name('meusPerfis');
    Route::post('/inscricao','UtilizadorController@inscricao_candidato')->name('candidatoinscricao');
 
+
+   // funcionário da secretaria pedagógica
+
+    Route::get('/vercandidaturas', 'UtilizadorController@vercandidaturas')->name('ver_candidatura');
+
 });
 
 Route::prefix('perfil')->group (function ()

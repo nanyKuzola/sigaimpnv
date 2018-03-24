@@ -38,7 +38,7 @@
             }
             .content {
 
-                margin-top: 70px;
+                margin-top: 82px;
                 margin-left: 300px;
 
             }
