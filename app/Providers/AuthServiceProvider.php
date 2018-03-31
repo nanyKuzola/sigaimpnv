@@ -25,7 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+
         //
+        /**
         Gate::define('Director Geral',function($user){
             return (strtolower($user->perfils()->first()->nome) == 'director');
        });
@@ -34,6 +36,13 @@ class AuthServiceProvider extends ServiceProvider
         });
         Gate::define('FSP',function($user){
             return (strtolower($user->perfils()->first()->nome) == 'FSP');
+        });**/
+        Gate::define('super administrador', function ($professor) {
+            return (strtolower($professor->cargo))=='super admininstrador';
+        });
+        Gate::define('secretaria pedagogica', function ($secretaria)
+        {
+           return $secretaria->cargo=='fsp';
         });
 
 

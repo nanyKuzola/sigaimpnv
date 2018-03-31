@@ -3,45 +3,43 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Estudante;
 
 class Curso extends Model
 {
-    //declaração de variaveis
+    //
+    protected $table = 'cursos';
+    public $timestamps = false;
 
-    protected $id;
-    protected $nome;
-    protected $descricao;
-    protected $duracao;
-    protected $perfilutilizador_id;
-
-    // retorna o utilizador associada ao curso
-    public function utilizadors()
+    protected $fillable = [
+        'nome','descricao','duracao', 'professor_id',
+    ];
+    // devolve os cursos que os estudantes se inscriveram
+    public function estudantes()
     {
-        return $this->belongsToMany('App\Utilizador');
+        return $this->belongsToMany('App\Estudante')->withTimestamps();
     }
-
-    // retorna os turnos que este curso tem
+    // devirou do relacionamento * para * com inscrição
+    public function inscricaos()
+    {
+        return $this->belongsToMany('App\Inscricao');
+    }
+    // relacção prof - curso
+    public function professor()
+    {
+        return $this->belongsTo('App\Professor');
+    }
+    //relacao com disciplina
+    public function disciplinas(){
+        return $this->belongsToMany('App\Disciplina','curso_disciplinas');
+    }
     public function turnos()
     {
-        return $this->belongsToMany('App\Turno');
+        return $this->belongsToMany('App\Turno','curso_turnos');
     }
-    // retorna as disciplinas que o curso tem
-    public function disciplinas()
+    public function turmas()
     {
-        return $this->belongsToMany('App\Disciplina');
+        return $this->hasMany('App\Turma');
     }
-    // retorna o coordenador do curso
-    public function perfilutilizador()
-    {
-        return $this->belongsTo('App\PerfilUtilizador');
-    }
-    // retorna nos anos associado a este curso
-    public function classes()
-    {
-        return $this->hasMany('App\Classe','curso_id');
-    }
-    public static function getClassNome()
-    {
-        return "Curso";
-    }
+
 }

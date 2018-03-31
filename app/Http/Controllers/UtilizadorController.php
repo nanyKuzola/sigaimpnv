@@ -9,7 +9,9 @@ use App\Utilizador;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-
+use App\Estudante;
+use App\Fsp;
+use App\Inscricao;
 class UtilizadorController extends Controller
 {
     //
@@ -23,26 +25,47 @@ class UtilizadorController extends Controller
     //
     public function entrar(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])){
 
-            return  redirect()->route('meusPerfis');
+        if (Auth::guard('estudante')->attempt(['email' => $request->email, 'password' => $request->password])){
+
+            return  view('pages.inicio');
 
         }
+        if (Auth::guard('fsp')->attempt(['email' => $request->email, 'password' => $request->password])){
+
+            return  view('pages.inicio');
+
+        }
+
+        if (Auth::guard('professor')->attempt(['nome_utilizador' => $request->email, 'password' => $request->password])){
+
+            return  view('pages.inicio');
+
+        }
+
         else
         {
             return redirect()->back();
         }
 
     }
-    public function inicio()
-    {
-        return view('pages.inicio');
-    }
+
     public function sair()
     {
-        if(Auth::check())
+
+        if(Auth::guard('estudante')->check())
         {
-            Auth::logout();
+            Auth::guard('estudante')->logout();
+            return redirect()->route('paginainicial');
+        }
+        if(Auth::guard('professor')->check())
+        {
+            Auth::guard('professor')->logout();
+            return redirect()->route('paginainicial');
+        }
+        if(Auth::guard('fsp')->check())
+        {
+            Auth::guard('fsp')->logout();
             return redirect()->route('paginainicial');
         }
     }
@@ -56,10 +79,10 @@ class UtilizadorController extends Controller
     }
     public function meusPerfis()
     {
-        $utilizador=Auth::user()->getAuthIdentifier();
 
 
-        return view('pages.utilizador.meuperfilactual', compact('utilizador'));
+
+        return view('pages.utilizador.perfil');
     }
     public function inscricao()
     {
@@ -69,62 +92,103 @@ class UtilizadorController extends Controller
     public function inscricao_candidato(Request $request)
     {
 
-        $utilizador = new Utilizador();
+
+        $utilizador = new Estudante();
+        // upload de imagen
 
         $utilizador->primeiro_nome=$request->nome;
         $utilizador->sobre_nome=$request->sobre_nome;
-        $utilizador->email=$request->nome.".".$request->sobre_nome."@impnv.co.ao";
+        $utilizador->email=$request->nome."@".$request->sobre_nome."co.ao";
         $utilizador->password=bcrypt("123456");
-        $utilizador->morada=" ";
+        $utilizador->morada=$request->morada;
         $utilizador->nome_pai=$request->nome_pai;
         $utilizador->nome_mae=$request->nome_mae;
 
-         $ano_actual = Carbon::now()->year;
-         $data_nascimento = explode("-",$request->data_nascimento);
+        $ano_actual = Carbon::now()->year;
+        $data_nascimento = explode("-",$request->data_nascimento);
 
-         $utilizador->born_day=$data_nascimento[2];
-         $utilizador->born_month=$data_nascimento[1];
-         $utilizador->born_year=$data_nascimento[0];
-         $utilizador->idade=$ano_actual-$utilizador->born_year;
-         $utilizador->bi=$request->numero_bilhete;
+        $utilizador->born_day=$data_nascimento[2];
+        $utilizador->born_month=$data_nascimento[1];
+        $utilizador->born_year=$data_nascimento[0];
+        $utilizador->idade=$ano_actual-$utilizador->born_year;
+        $utilizador->bi=$request->numero_bilhete;
 
-         $data_emissao = explode('-',$request->data_emissao);
-         $utilizador->bi_year=$data_emissao[0];
-         $utilizador->bi_month=$data_emissao[1];
-         $utilizador->bi_day=$data_emissao[2];
-         $utilizador->bi_local_emmissao=$request->local_emissao;
-         $utilizador->morada=$utilizador->bi_local_emmissao;
+        $data_emissao = explode('-',$request->data_emissao);
+        $utilizador->bi_year=$data_emissao[0];
+        $utilizador->bi_month=$data_emissao[1];
+        $utilizador->bi_day=$data_emissao[2];
+        $utilizador->bi_local_emmissao=$request->local_emissao;
+        $utilizador->morada=$request->morada;
 
-         $utilizador->genero=$request->genero;
-         $utilizador->telefone=$request->telemovel;
-         $utilizador->opcao_curso_1 = $request->op1;
-         $utilizador->opcao_curso_2 = $request->op2;
-         $utilizador->opcao_curso_3 = $request->op3;
-         $utilizador->estado=0;
+        $utilizador->genero=$request->genero;
+        $utilizador->telefone=$request->telemovel;
+        $utilizador->opcao_curso_1 = $request->op1;
+        $utilizador->opcao_curso_2 = $request->op2;
+        $utilizador->opcao_curso_3 = $request->op3;
+        $utilizador->estado=0;
+         // salvando bilhete de identidade
+        if($request->hasFile('bilhete') && $request->file('bilhete')->isValid())
+        {
+            // nome da imagem
+            $nome = kebab_case($request->numero_bilhete);
+            // pega extensão da imagem
+            $extension = $request->bilhete->extension();
+            // nome final da imagem
+            $nomebi = "{$nome}.{$extension}";
 
-         $utilizador->area_formacao = " ";
+            // guardando o nome do bi
+            $utilizador->PathBI=$nomebi;
+            // fazando o upload da imagem
+            $upload = $request->bilhete->storeAs('estudantes',$nomebi);
 
+
+        }
+        // salvando certificado de abilitações literarias
+        if($request->hasFile('certificado') && $request->file('certificado')->isValid())
+        {
+            // nome da imagem
+            $nomeimagem = $request->nome_mae.kebab_case($request->nome);
+            // pega extensão da imagem
+            $extencao = $request->certificado->extension();
+            // nome final da imagem
+            $nomecert= "{$nomeimagem}.{$extencao}";
+            // guardando o nome  de imagem com extensão
+            $utilizador->PathCert=$nomecert;
+            // fazando o upload da imagem na pasta estudantes
+            $uploads = $request->certificado->storeAs('estudantes',$nomecert);
+
+        }
+
+
+        // validações
+        // idade
+        $erro = " ";
+        if($utilizador->idade< 15 || $utilizador->idade>20)
+        {
+             $erro="idade";
+             return view('pages.secretaria.pedagogica.inscricoes.erros',compact('erro'));
+        }
+        //numero do bilhete
+        $size = strlen($utilizador->bi);
+
+        $utilizador->nome_utilizador=$request->numero_bilhete;
 
         $utilizador->save();
 
-        /*
+        $inscricao = new Inscricao();
+        $inscricao->estado="aberto";
+        $inscricao->estudante_id=$utilizador->id;
 
-        $_utilizador = Utilizador::find($utilizador->id);
-
-        $id_perfil_estudante = 11;// 11 é o id de perfil candidato a estudante
+        $inscricao->save();
 
 
-        $_utilizador->perfils()->attach($id_perfil_estudante); // associar o utilizador um perfil de candidato
 
-       //  foreach($_utilizador->perfils as $perfil) // pega os perfis que o utilizador tem
+
 
         // ASSOCIAÇÃO COM CADA CURSO QUE O UTILIZADOR ESCOLHEU
-        $_utilizador->cursos()->attach(Curso::where('nome','=',$utilizador->opcao_curso_1)->first()->id);
-        $_utilizador->cursos()->attach(Curso::where('nome','=',$utilizador->opcao_curso_2)->first()->id);
-        $_utilizador->cursos()->attach(Curso::where('nome','=',$utilizador->opcao_curso_3)->first()->id);*/
 
 
-        return redirect()->route('paginainicial');
+         return redirect()->route('paginainicial');
 
     }
     public function resultados()

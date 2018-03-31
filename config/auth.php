@@ -40,10 +40,21 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
+        ],
+        'estudante'  => [
+            'driver'  => 'session',
+            'provider' => 'estudantes',
+        ],
+        'fsp'  => [
+            'driver'  => 'session',
+            'provider' => 'fsps',
+        ],
+        'professor'  => [
+            'driver'  => 'session',
+            'provider' => 'professors',
         ],
     ],
 
@@ -69,6 +80,19 @@ return [
             'driver' => 'eloquent',
             'model' => App\Utilizador::class,
 
+        ],
+
+        'estudantes' => [
+            'driver' => 'eloquent',
+            'model'  => App\Estudante::class,
+        ],
+        'fsps' => [
+            'driver' => 'eloquent',
+            'model'  => App\Fsp::class,
+        ],
+        'professors' => [
+            'driver' => 'eloquent',
+            'model'  => App\Professor::class,
         ],
 
         // 'users' => [

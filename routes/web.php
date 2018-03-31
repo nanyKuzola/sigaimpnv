@@ -39,9 +39,34 @@ Route::prefix('utilizador')->group (function ()
 
 });
 
+ // modulo secretaria pedadógica
+Route::prefix('inscricao')->group(function ()
+{
+    Route::get('/ver','FspController@inscricao')->name('ver_inscricoes');
+    Route::get('/{id}','FspController@especify')->name('fichacompleta');
+
+
+});
+Route::post('/media/{id}','FspController@calculomedia')->name('media');
+Route::get('/media/{id}','FspController@mediaver')->name('media');
+Route::get('/validar/{id}',"FspController@validar")->name('aprovado');
+
+//
+Route::get('/bilhete/{id}','FspController@bilhete')->name('bilhetes');
+Route::prefix('candidaturas')->group (function ()
+{
+    Route::get('/ver', 'CursoEstudanteController@ver')->name('ver_candidatura');
+
+
+});
 Route::prefix('perfil')->group (function ()
 {
     Route::get('/cadastrar','PerfilController@showForm')->name('CPerfil');
     Route::post('/cadastrar','PerfilController@guardar')->name('CPerfil');
 
 });
+
+// super administraddor
+
+Route::get('/curso','ProfessorController@form')->name('cadastrarCurso');
+Route::post('/curso','ProfessorController@cadastro')->name('cadastrarCurso');
