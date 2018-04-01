@@ -3,15 +3,17 @@
 @section('conteudo')
 
 
+
     <div class="container-fluid">
         <p>
 
 
         </p>
+
         <div class="panel panel-default">
 
             <div class="panel-heading text-center">
-                <h3 class="panel-title"> </h3>
+                <h3 class="panel-title">CADASTRAR DE  CURSO</h3>
             </div>
 
             <div class="panel-body">

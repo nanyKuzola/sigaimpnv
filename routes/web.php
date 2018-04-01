@@ -70,3 +70,5 @@ Route::prefix('perfil')->group (function ()
 
 Route::get('/curso','ProfessorController@form')->name('cadastrarCurso');
 Route::post('/curso','ProfessorController@cadastro')->name('cadastrarCurso');
+Route::get('/disciplina','DisciplinaController@disciplina')->name('cadastrarDisciplina');
+Route::post('/disciplina','DisciplinaController@cadastro')->name('cadastrarDisciplina');

@@ -19,7 +19,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{route('cadastrarDisciplina')}}">
                                     <i class="fa fa-sticky-note"></i>
                                     <span>Disciplina</span>
                                 </a>
